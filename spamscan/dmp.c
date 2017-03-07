@@ -18,6 +18,7 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <ctype.h>
+#include <time.h>
 
 #define dmp_min(A,B)      (((A) < (B)) ? (A) : (B))
 #define dmp_num_cmp(A,B)  (((A) < (B)) ? -1 : ((A) > (B)) ? 1 : 0)
@@ -747,9 +748,8 @@ static double dmp_time(void)
 
 static double dmp_time(void)
 {
-    struct timeval tv;
-    gettimeofday(&tv, NULL);
-    return (double)tv.tv_sec + tv.tv_usec * 1E-6;
+    time_t tv = time(NULL);
+    return (double)tv + tv * 1E-6;
 }
 
 #endif

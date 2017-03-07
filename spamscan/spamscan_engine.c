@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
+#include <time.h>
 #include "../core/error.h"
+#include "../lib/irc_string.h"
 #include "spamscan.h"
 #include "spamscan_array.h"
 #include "spamscan_engine.h"
@@ -160,8 +163,7 @@ void ss_decrease(void) {
   ss_channel *chn;
   ss_user *usr;
 
-  struct timeval tv;
-  gettimeofday(&tv, NULL);
+  time_t ts = time(NULL);
 
   for (c = 0; c < sschannels.cursi; c++) {
     chn = &((ss_channel*)sschannels.content)[c];
@@ -180,11 +182,11 @@ void ss_decrease(void) {
           usr->points = points;
       }
 
-      /*if (&tv.tv_sec - usr->repeat->ts >= 60) {
+      if (difftime(ts, usr->repeat->ts) >= 60) {
         freesstring(usr->repeat->line);
-        free(&usr->repeat);
+        free(usr->repeat);
         usr->repeat = NULL;
-      }*/
+      }
 
     }
   }

@@ -212,27 +212,26 @@ void ss_handler(nick *target, int type, void **params) {
 
       usr->points += r;
       int rr = 0;
-      struct timeval tv;
-      gettimeofday(&tv, NULL);
+      double elapsed;
+      time_t ts = time(NULL);
 
       if (usr->repeat == NULL) {
         usr->repeat = malloc(sizeof(ss_repeat));
         usr->repeat->line = getsstring(line, strlen(line));
-        usr->repeat->ts = &tv.tv_sec;
+        usr->repeat->ts = ts;
       } else {
-        if (&tv.tv_sec - usr->repeat->ts < 60) {
+        elapsed = difftime(ts, usr->repeat->ts);
+        if (elapsed < 60) {
           if (line != NULL && usr->repeat->line->content != NULL)
             rr = spamscan_check_repeat(line, usr->repeat->line->content);
-        } else {
-          rr = -1;
         }
         freesstring(usr->repeat->line);
         usr->repeat->line = getsstring(line, strlen(line));
-        usr->repeat->ts = &tv.tv_sec;
+        usr->repeat->ts = ts;
       }
 
       if (IsOper(user))
-        sendnoticetouser(ssnick, user, "Line Length %zu, Line Points %.2f, Repeat Diff %d, User points %.2f", strlen(line), r, rr, usr->points);
+        sendnoticetouser(ssnick, user, "Line Length %zu, Line Points %.2f, Repeat Diff %d (%.2f), User points %.2f", strlen(line), r, rr, elapsed, usr->points);
 
       ss_processed++;
       chn->processed++;
