@@ -85,6 +85,14 @@ dbuser=operserv
 dbpass=moo
 db=trojanscan
 
+[spamscan]
+nick=S
+ident=S
+host=spamscan.example.com
+real=Spamscan
+auth=S
+authid=
+
 [miscreply]
 # these are for remote /ADMIN requests (by default on ircu/snircd only IRC Operators use remote /ADMIN)
 admin1=Located at someplace
