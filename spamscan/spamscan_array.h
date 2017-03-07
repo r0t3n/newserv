@@ -14,7 +14,7 @@ typedef struct {
 
 typedef struct {
   sstring *line;
-  time_t *ts;
+  time_t ts;
 } ss_repeat;
 
 typedef struct {

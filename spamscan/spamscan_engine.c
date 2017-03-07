@@ -182,6 +182,8 @@ void ss_decrease(void) {
           usr->points = points;
       }
 
+      if (usr->repeat == NULL)
+        continue;
       if (difftime(ts, usr->repeat->ts) >= 60) {
         freesstring(usr->repeat->line);
         free(usr->repeat);
