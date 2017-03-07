@@ -146,9 +146,10 @@ void ss_registeruser(void) {
 
   if (cp == NULL)
     localcreatechannel(ssnick, "#twilightzone");
-  else
+  else {
     localjoinchannel(ssnick, cp);
     localgetops(ssnick, cp);
+  }
 
   int i;
   ss_channel chn;
