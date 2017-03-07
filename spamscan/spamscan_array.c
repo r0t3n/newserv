@@ -135,7 +135,7 @@ int ss_parsechanfileline(char *line) {
   char name[CHANNELLEN+1];
   int profile = 1, processed = 0, warned = 0, fwarned = 0, kicked = 0, banned = 0;
 
-  if (sscanf(line, "%s %d %d %d %d %d %d %[^\n]",
+  if (sscanf(line, "%s %d %d %d %d %d %d",
              name, &profile, &processed, &warned, &fwarned, &kicked, &banned) < 1)
     return 0;
 

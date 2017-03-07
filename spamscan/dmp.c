@@ -747,9 +747,8 @@ static double dmp_time(void)
 
 static double dmp_time(void)
 {
-	struct timeval tv;
-    struct timezone tz;
-    gettimeofday(&tv, &tz);
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
     return (double)tv.tv_sec + tv.tv_usec * 1E-6;
 }
 
