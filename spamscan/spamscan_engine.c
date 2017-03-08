@@ -118,11 +118,11 @@ float spamscan_loop_line(char *line) {
   float p = 0;
 
   p += spamscan_calc_controlcodes(points->bold, profile->threshold, bc, total);
-  p += spamscan_calc_controlcodes(points->bold, profile->threshold, uc, total);
-  p += spamscan_calc_controlcodes(points->bold, profile->threshold, rc, total);
-  p += spamscan_calc_controlcodes(points->bold, profile->threshold, caps, total);
-  p += spamscan_calc_controlcodes(points->bold, profile->threshold, fgc, total);
-  p += spamscan_calc_controlcodes(points->bold, profile->threshold, bgc, total);
+  p += spamscan_calc_controlcodes(points->underline, profile->threshold, uc, total);
+  p += spamscan_calc_controlcodes(points->reverse, profile->threshold, rc, total);
+  p += spamscan_calc_controlcodes(points->caps, profile->threshold, caps, total);
+  p += spamscan_calc_controlcodes(points->foreground, profile->threshold, fgc, total);
+  p += spamscan_calc_controlcodes(points->background, profile->threshold, bgc, total);
 
   return p;
 }
